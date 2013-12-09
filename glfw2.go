@@ -25,167 +25,178 @@ type (
 	long int32
 )
 
-type GlfwVidMode struct {
+type VidMode struct {
 	Width, Height                int
 	RedBits, BlueBits, GreenBits int
 }
 
-type GlfwImage struct {
+type Image struct {
 	Width, Height int
 	Format        int
 	BytesPerPixel int
 	Data          *byte
 }
 
-type WindowMode int
+type WindowMode uint
 
 const (
 	Window WindowMode = iota + 0x00010001
 	FullScreen
 )
 
-type GlfwCond *void
-type GlfwMutex *void
-type GlfwThread int
+type EnableDisable uint
 
-type GlfwCharFunc func(int, int)
-type GlfwKeyFunc func(int, int)
-type GlfwMouseButtonFunc func(int, int)
-type GlfwMousePosFunc func(int, int)
-type GlfwMouseWheelFunc func(int)
-type GlfwThreadFunc func(*void)
-type GlfwWindowCloseFunc func() int
-type GlfwWindowRefreshFunc func()
-type GlfwWindowSizeFunc func(int, int)
+const (
+	MouseCursor EnableDisable = iota + 0x00030001
+	StickyKeys
+	StickyMouseButtons
+	SystemKeys
+	KeyRepeat
+	AutoPollEvents
+)
 
-var GlfwBroadcastCond func(cond GlfwCond)
-var GlfwCloseWindow func()
-var GlfwCreateCond func() GlfwCond
-var GlfwCreateMutex func() GlfwMutex
-var GlfwCreateThread func(fun GlfwThreadFunc, arg *void) GlfwThread
-var GlfwDestroyCond func(cond GlfwCond)
-var GlfwDestroyMutex func(mutex GlfwMutex)
-var GlfwDestroyThread func(ID GlfwThread)
-var GlfwDisable func(token int)
-var GlfwEnable func(token int)
-var GlfwExtensionSupported func(extension string) int
-var GlfwFreeImage func(img *GlfwImage)
-var GlfwGetDesktopMode func(mode *GlfwVidMode)
-var GlfwGetGLVersion func(major, minor, rev *int)
-var GlfwGetJoystickButtons func(joy int, buttons *byte, numbuttons int) int
-var GlfwGetJoystickParam func(joy, param int) int
-var GlfwGetJoystickPos func(joy int, pos *float32, numaxes int) int
-var GlfwGetKey func(key int) int
-var GlfwGetMouseButton func(button int) int
-var GlfwGetMousePos func(xpos, ypos *int)
-var GlfwGetMouseWheel func() int
-var GlfwGetNumberOfProcessors func() int
-var GlfwGetProcAddress func(procname string) *void
-var GlfwGetThreadID func() GlfwThread
-var GlfwGetTime func() float64
-var GlfwGetVersion func(major, minor, rev *int)
-var GlfwGetVideoModes func(list *GlfwVidMode, maxcount int) int
-var GlfwGetWindowParam func(param int) int
-var GlfwGetWindowSize func(width, height *int)
-var GlfwIconifyWindow func()
-var GlfwInit func() bool
-var GlfwLoadMemoryTexture2D func(data *void, size long, flags int) int
-var GlfwLoadTexture2D func(name string, flags int) int
-var GlfwLoadTextureImage2D func(img *GlfwImage, flags int) int
-var GlfwLockMutex func(mutex GlfwMutex)
-var GlfwOpenWindow func(width, height, redbits, greenbits, bluebits, alphabits, depthbits, stencilbits int, mode WindowMode) bool
-var GlfwOpenWindowHint func(target, hint int)
-var GlfwPollEvents func()
-var GlfwReadImage func(name string, img *GlfwImage, flags int) int
-var GlfwReadMemoryImage func(data *void, size long, img *GlfwImage, flags int) int
-var GlfwRestoreWindow func()
-var GlfwSetCharCallback func(cbfun GlfwCharFunc)
-var GlfwSetKeyCallback func(cbfun GlfwKeyFunc)
-var GlfwSetMouseButtonCallback func(cbfun GlfwMouseButtonFunc)
-var GlfwSetMousePos func(xpos, ypos int)
-var GlfwSetMousePosCallback func(cbfun GlfwMousePosFunc)
-var GlfwSetMouseWheel func(pos int)
-var GlfwSetMouseWheelCallback func(cbfun GlfwMouseWheelFunc)
-var GlfwSetTime func(time float64)
-var GlfwSetWindowCloseCallback func(cbfun GlfwWindowCloseFunc)
-var GlfwSetWindowPos func(x, y int)
-var GlfwSetWindowRefreshCallback func(cbfun GlfwWindowRefreshFunc)
-var GlfwSetWindowSize func(width, height int)
-var GlfwSetWindowSizeCallback func(cbfun GlfwWindowSizeFunc)
-var GlfwSetWindowTitle func(title string)
-var GlfwSignalCond func(cond GlfwCond)
-var GlfwSleep func(time float64)
-var GlfwSwapBuffers func()
-var GlfwSwapInterval func(interval int)
-var GlfwTerminate func()
-var GlfwUnlockMutex func(mutex GlfwMutex)
-var GlfwWaitCond func(cond GlfwCond, mutex GlfwMutex, timeout float64)
-var GlfwWaitEvents func()
-var GlfwWaitThread func(ID GlfwThread, waitmode int) int
+type Cond *void
+type Mutex *void
+type Thread int
+
+type CharFunc func(int, int)
+type KeyFunc func(int, int)
+type MouseButtonFunc func(int, int)
+type MousePosFunc func(int, int)
+type MouseWheelFunc func(int)
+type ThreadFunc func(*void)
+type WindowCloseFunc func() int
+type WindowRefreshFunc func()
+type WindowSizeFunc func(int, int)
+
+var BroadcastCond func(cond Cond)
+var CloseWindow func()
+var CreateCond func() Cond
+var CreateMutex func() Mutex
+var CreateThread func(fun ThreadFunc, arg *void) Thread
+var DestroyCond func(cond Cond)
+var DestroyMutex func(mutex Mutex)
+var DestroyThread func(ID Thread)
+var Disable func(token EnableDisable)
+var Enable func(token EnableDisable)
+var ExtensionSupported func(extension string) int
+var FreeImage func(img *Image)
+var GetDesktopMode func(mode *VidMode)
+var GetGLVersion func(major, minor, rev *int)
+var GetJoystickButtons func(joy int, buttons *byte, numbuttons int) int
+var GetJoystickParam func(joy, param int) int
+var GetJoystickPos func(joy int, pos *float32, numaxes int) int
+var GetKey func(key int) bool
+var GetMouseButton func(button int) int
+var GetMousePos func(xpos, ypos *int)
+var GetMouseWheel func() int
+var GetNumberOfProcessors func() int
+var GetProcAddress func(procname string) *void
+var GetThreadID func() Thread
+var GetTime func() float64
+var GetVersion func(major, minor, rev *int)
+var GetVideoModes func(list *VidMode, maxcount int) int
+var GetWindowParam func(param int) int
+var GetWindowSize func(width, height *int)
+var IconifyWindow func()
+var Init func() bool
+var LoadMemoryTexture2D func(data *void, size long, flags int) int
+var LoadTexture2D func(name string, flags int) int
+var LoadTextureImage2D func(img *Image, flags int) int
+var LockMutex func(mutex Mutex)
+var OpenWindow func(width, height, redbits, greenbits, bluebits, alphabits, depthbits, stencilbits int, mode WindowMode) bool
+var OpenWindowHint func(target, hint int)
+var PollEvents func()
+var ReadImage func(name string, img *Image, flags int) int
+var ReadMemoryImage func(data *void, size long, img *Image, flags int) int
+var RestoreWindow func()
+var SetCharCallback func(cbfun CharFunc)
+var SetKeyCallback func(cbfun KeyFunc)
+var SetMouseButtonCallback func(cbfun MouseButtonFunc)
+var SetMousePos func(xpos, ypos int)
+var SetMousePosCallback func(cbfun MousePosFunc)
+var SetMouseWheel func(pos int)
+var SetMouseWheelCallback func(cbfun MouseWheelFunc)
+var SetTime func(time float64)
+var SetWindowCloseCallback func(cbfun WindowCloseFunc)
+var SetWindowPos func(x, y int)
+var SetWindowRefreshCallback func(cbfun WindowRefreshFunc)
+var SetWindowSize func(width, height int)
+var SetWindowSizeCallback func(cbfun WindowSizeFunc)
+var SetWindowTitle func(title string)
+var SignalCond func(cond Cond)
+var Sleep func(time float64)
+var SwapBuffers func()
+var SwapInterval func(interval int)
+var Terminate func()
+var UnlockMutex func(mutex Mutex)
+var WaitCond func(cond Cond, mutex Mutex, timeout float64)
+var WaitEvents func()
+var WaitThread func(ID Thread, waitmode int) int
 
 var allApis = outside.Apis{
-	{"glfwBroadcastCond", &GlfwBroadcastCond},
-	{"glfwCloseWindow", &GlfwCloseWindow},
-	{"glfwCreateCond", &GlfwCreateCond},
-	{"glfwCreateMutex", &GlfwCreateMutex},
-	{"glfwCreateThread", &GlfwCreateThread},
-	{"glfwDestroyCond", &GlfwDestroyCond},
-	{"glfwDestroyMutex", &GlfwDestroyMutex},
-	{"glfwDestroyThread", &GlfwDestroyThread},
-	{"glfwDisable", &GlfwDisable},
-	{"glfwEnable", &GlfwEnable},
-	{"glfwExtensionSupported", &GlfwExtensionSupported},
-	{"glfwFreeImage", &GlfwFreeImage},
-	{"glfwGetDesktopMode", &GlfwGetDesktopMode},
-	{"glfwGetGLVersion", &GlfwGetGLVersion},
-	{"glfwGetJoystickButtons", &GlfwGetJoystickButtons},
-	{"glfwGetJoystickParam", &GlfwGetJoystickParam},
-	{"glfwGetJoystickPos", &GlfwGetJoystickPos},
-	{"glfwGetKey", &GlfwGetKey},
-	{"glfwGetMouseButton", &GlfwGetMouseButton},
-	{"glfwGetMousePos", &GlfwGetMousePos},
-	{"glfwGetMouseWheel", &GlfwGetMouseWheel},
-	{"glfwGetNumberOfProcessors", &GlfwGetNumberOfProcessors},
-	{"glfwGetProcAddress", &GlfwGetProcAddress},
-	{"glfwGetThreadID", &GlfwGetThreadID},
-	{"glfwGetTime", &GlfwGetTime},
-	{"glfwGetVersion", &GlfwGetVersion},
-	{"glfwGetVideoModes", &GlfwGetVideoModes},
-	{"glfwGetWindowParam", &GlfwGetWindowParam},
-	{"glfwGetWindowSize", &GlfwGetWindowSize},
-	{"glfwIconifyWindow", &GlfwIconifyWindow},
-	{"glfwInit", &GlfwInit},
-	{"glfwLoadMemoryTexture2D", &GlfwLoadMemoryTexture2D},
-	{"glfwLoadTexture2D", &GlfwLoadTexture2D},
-	{"glfwLoadTextureImage2D", &GlfwLoadTextureImage2D},
-	{"glfwLockMutex", &GlfwLockMutex},
-	{"glfwOpenWindow", &GlfwOpenWindow},
-	{"glfwOpenWindowHint", &GlfwOpenWindowHint},
-	{"glfwPollEvents", &GlfwPollEvents},
-	{"glfwReadImage", &GlfwReadImage},
-	{"glfwReadMemoryImage", &GlfwReadMemoryImage},
-	{"glfwRestoreWindow", &GlfwRestoreWindow},
-	{"glfwSetCharCallback", &GlfwSetCharCallback},
-	{"glfwSetKeyCallback", &GlfwSetKeyCallback},
-	{"glfwSetMouseButtonCallback", &GlfwSetMouseButtonCallback},
-	{"glfwSetMousePos", &GlfwSetMousePos},
-	{"glfwSetMousePosCallback", &GlfwSetMousePosCallback},
-	{"glfwSetMouseWheel", &GlfwSetMouseWheel},
-	{"glfwSetMouseWheelCallback", &GlfwSetMouseWheelCallback},
-	{"glfwSetTime", &GlfwSetTime},
-	{"glfwSetWindowCloseCallback", &GlfwSetWindowCloseCallback},
-	{"glfwSetWindowPos", &GlfwSetWindowPos},
-	{"glfwSetWindowRefreshCallback", &GlfwSetWindowRefreshCallback},
-	{"glfwSetWindowSize", &GlfwSetWindowSize},
-	{"glfwSetWindowSizeCallback", &GlfwSetWindowSizeCallback},
-	{"glfwSetWindowTitle", &GlfwSetWindowTitle},
-	{"glfwSignalCond", &GlfwSignalCond},
-	{"glfwSleep", &GlfwSleep},
-	{"glfwSwapBuffers", &GlfwSwapBuffers},
-	{"glfwSwapInterval", &GlfwSwapInterval},
-	{"glfwTerminate", &GlfwTerminate},
-	{"glfwUnlockMutex", &GlfwUnlockMutex},
-	{"glfwWaitCond", &GlfwWaitCond},
-	{"glfwWaitEvents", &GlfwWaitEvents},
-	{"glfwWaitThread", &GlfwWaitThread},
+	{"glfwBroadcastCond", &BroadcastCond},
+	{"glfwCloseWindow", &CloseWindow},
+	{"glfwCreateCond", &CreateCond},
+	{"glfwCreateMutex", &CreateMutex},
+	{"glfwCreateThread", &CreateThread},
+	{"glfwDestroyCond", &DestroyCond},
+	{"glfwDestroyMutex", &DestroyMutex},
+	{"glfwDestroyThread", &DestroyThread},
+	{"glfwDisable", &Disable},
+	{"glfwEnable", &Enable},
+	{"glfwExtensionSupported", &ExtensionSupported},
+	{"glfwFreeImage", &FreeImage},
+	{"glfwGetDesktopMode", &GetDesktopMode},
+	{"glfwGetGLVersion", &GetGLVersion},
+	{"glfwGetJoystickButtons", &GetJoystickButtons},
+	{"glfwGetJoystickParam", &GetJoystickParam},
+	{"glfwGetJoystickPos", &GetJoystickPos},
+	{"glfwGetKey", &GetKey},
+	{"glfwGetMouseButton", &GetMouseButton},
+	{"glfwGetMousePos", &GetMousePos},
+	{"glfwGetMouseWheel", &GetMouseWheel},
+	{"glfwGetNumberOfProcessors", &GetNumberOfProcessors},
+	{"glfwGetProcAddress", &GetProcAddress},
+	{"glfwGetThreadID", &GetThreadID},
+	{"glfwGetTime", &GetTime},
+	{"glfwGetVersion", &GetVersion},
+	{"glfwGetVideoModes", &GetVideoModes},
+	{"glfwGetWindowParam", &GetWindowParam},
+	{"glfwGetWindowSize", &GetWindowSize},
+	{"glfwIconifyWindow", &IconifyWindow},
+	{"glfwInit", &Init},
+	{"glfwLoadMemoryTexture2D", &LoadMemoryTexture2D},
+	{"glfwLoadTexture2D", &LoadTexture2D},
+	{"glfwLoadTextureImage2D", &LoadTextureImage2D},
+	{"glfwLockMutex", &LockMutex},
+	{"glfwOpenWindow", &OpenWindow},
+	{"glfwOpenWindowHint", &OpenWindowHint},
+	{"glfwPollEvents", &PollEvents},
+	{"glfwReadImage", &ReadImage},
+	{"glfwReadMemoryImage", &ReadMemoryImage},
+	{"glfwRestoreWindow", &RestoreWindow},
+	{"glfwSetCharCallback", &SetCharCallback},
+	{"glfwSetKeyCallback", &SetKeyCallback},
+	{"glfwSetMouseButtonCallback", &SetMouseButtonCallback},
+	{"glfwSetMousePos", &SetMousePos},
+	{"glfwSetMousePosCallback", &SetMousePosCallback},
+	{"glfwSetMouseWheel", &SetMouseWheel},
+	{"glfwSetMouseWheelCallback", &SetMouseWheelCallback},
+	{"glfwSetTime", &SetTime},
+	{"glfwSetWindowCloseCallback", &SetWindowCloseCallback},
+	{"glfwSetWindowPos", &SetWindowPos},
+	{"glfwSetWindowRefreshCallback", &SetWindowRefreshCallback},
+	{"glfwSetWindowSize", &SetWindowSize},
+	{"glfwSetWindowSizeCallback", &SetWindowSizeCallback},
+	{"glfwSetWindowTitle", &SetWindowTitle},
+	{"glfwSignalCond", &SignalCond},
+	{"glfwSleep", &Sleep},
+	{"glfwSwapBuffers", &SwapBuffers},
+	{"glfwSwapInterval", &SwapInterval},
+	{"glfwTerminate", &Terminate},
+	{"glfwUnlockMutex", &UnlockMutex},
+	{"glfwWaitCond", &WaitCond},
+	{"glfwWaitEvents", &WaitEvents},
+	{"glfwWaitThread", &WaitThread},
 }
