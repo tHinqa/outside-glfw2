@@ -5,8 +5,6 @@
 //glfw dll. Definitions based on GLFW 2.7.9
 package glfw2
 
-//MOTE(t): all callbacks and calls are stdcall
-
 import (
 	"github.com/tHinqa/outside"
 	. "runtime"
