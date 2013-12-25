@@ -198,3 +198,82 @@ var allApis = outside.Apis{
 	{"glfwWaitEvents", &WaitEvents},
 	{"glfwWaitThread", &WaitThread},
 }
+
+const (
+	KeySpecial = iota + 256
+	KeyEsc
+	KeyF1
+	KeyF2
+	KeyF3
+	KeyF4
+	KeyF5
+	KeyF6
+	KeyF7
+	KeyF8
+	KeyF9
+	KeyF10
+	KeyF11
+	KeyF12
+	KeyF13
+	KeyF14
+	KeyF15
+	KeyF16
+	KeyF17
+	KeyF18
+	KeyF19
+	KeyF20
+	KeyF21
+	KeyF22
+	KeyF23
+	KeyF24
+	KeyF25
+	KeyUp
+	KeyDown
+	KeyLeft
+	KeyRight
+	KeyLShift
+	KeyRShift
+	KeyLCtrl
+	KeyRCtrl
+	KeyLAlt
+	KeyRAlt
+	KeyTab
+	KeyEnter
+	KeyBackspace
+	KeyInsert
+	KeyDel
+	KeyPageUp
+	KeyPageDown
+	KeyHome
+	KeyEnd
+	KeyKp0
+	KeyKp1
+	KeyKp2
+	KeyKp3
+	KeyKp4
+	KeyKp5
+	KeyKp6
+	KeyKp7
+	KeyKp8
+	KeyKp9
+	KeyKpDivide
+	KeyKpMultiply
+	KeyKpSubtract
+	KeyKpAdd
+	KeyKpDecimal
+	KeyKpEqual
+	KeyKpEnter
+	KeyKpNumLock
+	KeyCapsLock
+	KeyScrollLock
+	KeyPause
+	KeyLSuper
+	KeyRSuper
+	KeyMenu
+	KeyLast = KeyMenu
+)
+
+const (
+	Release = iota
+	Press
+)
